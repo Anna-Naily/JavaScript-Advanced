@@ -1,9 +1,4 @@
 "use strict";
-let buttonCartEl = document.querySelector(".cart-details");
-let cartEl = document.querySelector(".cart-block");
-let navigationPage = document.querySelector(".navigation-page");
-let blockForProductsInCart = document.querySelector(".block-for-products");
-
 //Каталог товаров
 class GoodsList {
   constructor() {
@@ -71,6 +66,7 @@ class GoodsList {
   }
   //Отрисовка продуктов на странице
   renderProductsOnPage() {
+    let navigationPage = document.querySelector(".navigation-page");
     let productCardBar = `<div class="product-card-bar"><ul class="item-card-bar">`;
     for (let i = 0; i < this.allProducts.length; i++) {
       productCardBar += `<li class="item-products card-icon">
@@ -99,19 +95,36 @@ class GoodsList {
     productCardBar += `</ul></div>`;
     navigationPage.insertAdjacentHTML("beforebegin", productCardBar);
   }
+  //Метод, определяющий суммарную стоимость всех товаров в каталоге
+  totalSumProducts() {
+    for (let i = 0; i < this.allProducts.length; i++) {
+      this.total += this.allProducts[i].price;
+    }
+    console.log(this.total);
+  }
+}
+//Продукты в корзине
+class ProductsInCart {
+  constructor() {
+    this.basket = {};
+    //Массив карточек товаров, добавленных в корзину
+    this.renderProducts = [];
+  }
 }
 // Класс корзины
 class Cart {
   showHidden() {
+    let cartEl = document.querySelector(".cart-block");
     cartEl.classList.toggle("hidden");
   }
 }
 let goodlist = new GoodsList();
 let cart = new Cart();
 //Обработчик логотипа корзины. Открывает окно корзины с классом hidden.
+let buttonCartEl = document.querySelector(".cart-details");
 buttonCartEl.addEventListener("click", function () {
   cart.showHidden();
 });
-
 goodlist.createAllProducts();
 goodlist.renderProductsOnPage();
+goodlist.totalSumProducts();
