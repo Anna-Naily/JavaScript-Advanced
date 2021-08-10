@@ -23,7 +23,7 @@
           <div class="top-header">
             <div class="top-header-left">
               <a href="index.html"><img src="image/logo.png" alt="logo" /></a>
-              <form class="search-panel" action="#" method="get">
+              <div class="search-panel">
                 <details class="details-browse">
                   <summary class="summary-browse">Browse</summary>
                   <div class="details-element">
@@ -64,73 +64,11 @@
                     </ul>
                   </div>
                 </details>
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="Search for Item..."
-                  v-model="searchLine"
-                />
-                <button @click="filterGoods" class="search" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-              </form>
+                <filtered ref="filtered"></filtered>
+              </div>
             </div>
             <div class="top-header-right">
-              <span @click="isVisibleCart=!isVisibleCart" class="cart-details">
-                <img class="basket" src="image/logo_cart.svg" alt="cart" />
-                <span class="count-buy" v-if="basket.length>0"
-                  >{{calculationCountLogo}}</span
-                >
-              </span>
-              <div class="cart-block" v-if="isVisibleCart">
-                <div
-                  class="block-for-products"
-                  v-for="product of productsRenderInBasket"
-                >
-                  <div class="cart-element">
-                    <img
-                      class="img-cart"
-                      width="100px"
-                      height="100px"
-                      :src="product.image"
-                      alt="photo"
-                    />
-                    <div class="cart-info">
-                      <h2 class="heading-cart">{{product.product_name}}</h2>
-                      <div class="rating-block">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star-half-alt"></i>
-                      </div>
-                      <p class="count-cart">
-                        {{product.count}} x ${{product.price}}
-                      </p>
-                    </div>
-                    <span
-                      @click="removeProduct(product.id_product)"
-                      data-idSpan="product.id_product"
-                      class="delete-cart"
-                    >
-                      <i class="fas fa-times-circle"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="price-cart">
-                  <h2 class="total" v-if="basket.length!=0">
-                    total
-                    <span class="totalPrice"
-                      >$ {{recalculationTotalSum.toFixed(2)}}</span
-                    >
-                  </h2>
-                  <h2 class="total" v-else>Товаров нет</h2>
-                </div>
-                <div class="button-cart">
-                  <a href="checkout.html" class="link-checkout">CHECKOUT </a>
-                  <a href="shopping_cart.html" class="link-checkout go-to-cart"
-                    >GO TO CART
-                  </a>
-                </div>
-              </div>
+              <cart ref="cart"></cart>
               <a href="checkout.html" class="button-account"
                 >My Account
                 <div class="triangle"></div>
@@ -1077,42 +1015,8 @@
             </form>
           </div>
           <div class="product-card-bar">
-            <ul class="item-card-bar">
-              <li
-                class="item-products card-icon"
-                v-for="product of filteredGoods"
-                :key="product.id_product"
-              >
-                <a class="card-link" href="single_page.html">
-                  <div class="picture-card">
-                    <img class="img-product" :src="product.image" alt="photo" />
-                  </div>
-                  <h4 class="name-product">{{product.product_name}}</h4>
-                  <div class="text-rating-block">
-                    <p class="price">${{product.price.toFixed(2)}}</p>
-                    <div class="rating-product">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                  </div>
-                </a>
-                <button
-                  @click="addProduct(product.id_product)"
-                  data-id="product.id_product"
-                  class="add-product"
-                >
-                  <img
-                    class="cart"
-                    src="image/white-cart.svg"
-                    alt="white-cart"
-                  />
-                  Add to cart
-                </button>
-              </li>
-            </ul>
+            <products ref="products"></products>
+            <error ref="error"></error>
           </div>
           <div class="navigation-page">
             <ul class="page">
@@ -1318,6 +1222,10 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="ProductsComp.js"></script>
+    <script src="CartComp.js"></script>
+    <script src="FilterComp.js"></script>
+    <script src="ErrorComp.js"></script>
     <script src="basket_vue.js"></script>
     <!-- <script src="basket.js"></script>
     -->

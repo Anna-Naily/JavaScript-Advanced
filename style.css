@@ -238,7 +238,7 @@ footer {
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   margin-left: -20px;
-  margin-top: 65px;
+  margin-top: 15px;
 }
 
 .cart-block:before {
@@ -275,6 +275,7 @@ footer {
   flex-direction: column;
   margin-left: 14px;
   padding-top: 10px;
+  width: 100px;
 }
 
 .price-cart {
@@ -2648,5 +2649,15 @@ summary {
   cursor: pointer;
   margin-top: 11px;
   margin-bottom: 15px;
+}
+.error-block {
+  border: 1px solid red;
+  padding: 15px;
+}
+.error-msg {
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */
