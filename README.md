@@ -1,2 +1,2 @@
-# JavaScript-Advanced
-JavaScript level 2
+# Online Store
+
